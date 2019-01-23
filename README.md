@@ -1,2 +1,4 @@
-scripts
+Scripts
 =======
+
+Scripts for macOS
