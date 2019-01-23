@@ -4,22 +4,40 @@
 echo "Checking homebrew packages..."
 brew update > /dev/null;
 new_packages=$(brew outdated --quiet)
-new_casks=$(brew cask outdated --quiet)
-num_casks=$(echo $new_casks | wc -w)
 num_packages=$(echo $new_packages | wc -w)
 
-if [ $num_packages -gt 0 -o $num_casks -gt 0 ]; then
-    echo "New package updates available:"
+if [ $num_packages -gt 0 ]; then
+	echo "New package updates available:"
     for package in $new_packages; do
 	echo "   * $package";
-    done
-    for cask in $new_casks; do
-	echo "   * $cask (cask)";
     done
 else
     echo "No new package updates available."
 fi
 
+if [ $num_packages -gt 0 ]; then
+	echo "Do you wish to install these updates?"
+	select yn in "Yes" "No"; do
+	    case $yn in
+		Yes ) echo "Installing homebrew packages..."; brew upgrade; break;;
+		No ) break;;
+	    esac
+	done
+fi
+
+echo "Cleaning up old homebrew packages..."
+brew cleanup > /dev/null;
+
 # macOS
 echo "Checking macOS updates..."
-softwareupdate -l | tail +5
+software_update=$(softwareupdate -l | tail +4)
+
+if [ "$software_update" != "No new software available." ]; then
+	echo "Do you wish to install these updates?"
+	select yn in "Yes" "No"; do
+	    case $yn in
+		Yes ) echo "Downloading and installing macOS packages..."; softwareupdate -iaR | tail +5; break;;
+		No ) exit;;
+	    esac
+	done
+fi
