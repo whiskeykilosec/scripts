@@ -1,4 +1,4 @@
 Scripts
 =======
 
-Scripts for macOS
+My place for scripts that do things.
