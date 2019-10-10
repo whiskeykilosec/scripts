@@ -1,13 +1,10 @@
 #!/bin/zsh
-
 # Credit dardo82/safari-favicons.sh
-# Fix Safari Missing Touch Favicons
+# Fix Safari Favorites Icons
 
-HLSD="$HOME/Library/Safari"; SCD="$HLSD/Touch Icons Cache/Images"
-
-typeset -A BMA; BMA=($(plutil -p "$HLSD/Bookmarks.plist" \
-| sed -n '/title/{h;n;n;H;x;p'$'\n''}' \
-| awk -F'"' '{name=$4; getline; if($0~/\"[a-z]+:\/\//){print name" "$4}}'))
-
-for bmn in ${(k)BMA[@]}; do
-cp -v "$1/$bmn.png" "$SCD/${(U)$(md5 -qs ${${${BMA[$bmn]}#*//}%%/*})}.png"; done
+CS="cache_settings"; TIC="Touch Icons Cache"; DIR="$HOME/Library/Safari/$TIC/Images"
+DB="$DIR/../${${TIC// }%%s*}${${(C)CS}//_}.db"; SQL=$(sqlite3 "$DB" "SELECT host FROM $CS")
+sqlite3 "$DB" "UPDATE $CS SET ${${${(L)TIC// /_}#*_}//s/_is_in}=1, download_status_flags=1"
+for png in "$1"/*.png; do URL="$(plutil -convert xml1 -o - "$DIR/../../Bookmarks.plist" | \
+awk -F '[</>]' -v name="${${png##*/}%%.*}" '$3~name{getline;getline;getline;print $5}')"; \
+cp -f -v "$png" "$DIR/${(U)$(md5 -q -s $URL)}.png"; done; chflags -v uappnd $DIR $DB
