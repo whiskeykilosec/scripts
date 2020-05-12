@@ -21,7 +21,7 @@ if [ $num_packages -gt 0 ]; then
 	echo "Do you wish to install these updates?"
 	select yn in "Yes" "No"; do
 	    case $yn in
-		Yes ) echo "Installing homebrew packages..."; brew upgrade; break;;
+		Yes ) echo "Installing homebrew packages..."; brew upgrade; brew cask upgrade; break;;
 		No ) break;;
 	    esac
 	done
