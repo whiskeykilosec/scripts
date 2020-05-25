@@ -1,7 +1,7 @@
 #!/bin/bash
-# removes line breaks
-# made with Sublist3r results in mind specifically
-# tested on MacOS
+# removes Sublist3r line break tags
+# tested on MacOS, which doesn't respect \n. Need an actual new line preceded by a backslash
+# backup your file. -i will overwrite the source
 
 sed -i '' 's/<BR>/\
 /g' $1
