@@ -1,0 +1,15 @@
+## ALIASES
+alias ls='ls -l'
+alias la='ls -lah'
+alias update='sudo apt update && sudo apt upgrade -y'
+alias webserver='cd ~/webserver && sudo python3 -m http.server 80; cd -'
+alias ftpserver='sudo python3 -m pyftpdlib -21 -w'
+alias ss='searchsploit $1'
+alias ssx='searchsploit -x $1'
+
+# metasploit
+alias pattern='/usr/share/metasploit-framework/tools/exploit/pattern_create.rb'
+alias offset='/usr/share/metasploit-framework/tools/exploit/pattern_offset.rb'
+
+# rdp
+#alias rdp='rdesktop -g 90% -u [user] -p [pass] X.X.X.X &'
