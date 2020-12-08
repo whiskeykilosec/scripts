@@ -11,5 +11,11 @@ alias ssx='searchsploit -x $1'
 alias pattern='/usr/share/metasploit-framework/tools/exploit/pattern_create.rb'
 alias offset='/usr/share/metasploit-framework/tools/exploit/pattern_offset.rb'
 
-# rdp
-#alias rdp='rdesktop -g 90% -u [user] -p [pass] X.X.X.X &'
+# zsh functions
+function windows() {
+  rdesktop -g 90% -u $1 -p lab X.X.X.X &
+}
+
+function debian() {
+  rdesktop -g 90% -u $1 -p lab X.X.X.X &
+}
