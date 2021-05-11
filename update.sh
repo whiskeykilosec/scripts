@@ -30,6 +30,10 @@ fi
 echo "Cleaning up old homebrew packages..."
 brew cleanup > /dev/null;
 
+# Node
+echo "Updating global node packages..."
+npm update -g > /dev/null;
+
 # Update Mac App Store apps
 # Done via https://github.com/mas-cli/mas
 echo "Upgrading macOS App Store apps..."
