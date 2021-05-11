@@ -33,6 +33,7 @@ brew cleanup > /dev/null;
 # Node
 echo "Updating global node packages..."
 npm update -g > /dev/null;
+npm audit fix > /dev/null;
 
 # Update Mac App Store apps
 # Done via https://github.com/mas-cli/mas
