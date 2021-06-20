@@ -29,6 +29,7 @@ fi
 
 echo "Cleaning up old homebrew packages..."
 brew cleanup > /dev/null;
+brew autoremove > /dev/null;
 
 # Node
 echo "Updating global node packages..."
